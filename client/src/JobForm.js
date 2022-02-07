@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CreateJob } from './request';
 
 export class JobForm extends Component {
   constructor(props) {
@@ -11,9 +12,11 @@ export class JobForm extends Component {
     this.setState({[name]: value});
   }
 
-  handleClick(event) {
+  async handleClick(event) {
     event.preventDefault();
-    console.log('should post a new job:', this.state);
+    const job = await CreateJob(this.state)
+    console.log('should post a new job:', job);
+    this.props.history.push('/')
   }
 
   render() {
